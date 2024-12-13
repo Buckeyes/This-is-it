@@ -1,0 +1,186 @@
+import tkinter as tk
+from tkinter import messagebox
+import traceback
+
+# Function to check for basic syntax errors in a given Python code snippet
+def debug_code(code):
+    try:
+        exec(code)  # Try to execute the code
+        return "No errors found in your code!"
+    except Exception as e:
+        return f"Error detected: {str(e)}"
+
+# Functions for the scientific content (same as before)
+def scientific_method():
+    messagebox.showinfo("Scientific Method", """
+    The Scientific Method:
+    1. Observation: Identify the problem or question.
+    2. Research: Gather information.
+    3. Hypothesis: Propose a possible explanation or solution.
+    4. Experiment: Test your hypothesis through experiments.
+    5. Analyze: Examine the data and draw conclusions.
+    6. Conclusion: Decide whether the hypothesis was supported or not.
+    7. Report: Share your results.
+    """)
+
+def characteristics_of_life():
+    messagebox.showinfo("Characteristics of Life", """
+    Characteristics of Life:
+    1. Growth and Development: All living things grow and develop.
+    2. Reproduction: Organisms reproduce and pass on genetic information.
+    3. Metabolism: Organisms require energy to maintain life processes.
+    4. Response to Stimuli: Living things react to changes in their environment.
+    5. Homeostasis: Maintaining a stable internal environment.
+    6. Adaptation: Over time, organisms adapt to their environment.
+    7. Cellular Organization: Life is composed of one or more cells.
+    """)
+
+def chemistry():
+    messagebox.showinfo("Basic Chemistry Concepts", """
+    Basic Chemistry Concepts:
+    1. Matter: Everything that has mass and occupies space.
+    2. Elements: Pure substances consisting of only one type of atom.
+    3. Atoms: The smallest unit of an element.
+    4. Compounds: Two or more elements chemically bonded together.
+    5. Chemical Reactions: Process where reactants form new products.
+    6. pH: A measure of acidity or alkalinity.
+    """)
+
+def properties_of_water():
+    messagebox.showinfo("Properties of Water", """
+    Properties of Water:
+    1. Polarity: Water molecules have a positive and negative end, making them a great solvent.
+    2. Cohesion: Water molecules stick to each other.
+    3. Adhesion: Water molecules stick to other substances.
+    4. High Specific Heat: Water can absorb a lot of heat before it gets hot.
+    5. Surface Tension: Water has a high surface tension due to cohesion.
+    6. Ice Floats: Ice is less dense than liquid water, allowing it to float.
+    """)
+
+def biomolecules():
+    messagebox.showinfo("Biomolecules", """
+    Biomolecules:
+    1. Carbohydrates: Provide energy (e.g., sugars, starches).
+    2. Lipids: Store energy and form cell membranes (e.g., fats, oils).
+    3. Proteins: Serve as enzymes, structure, and transport (e.g., enzymes, antibodies).
+    4. Nucleic Acids: Store and transmit genetic information (e.g., DNA, RNA).
+    """)
+
+def enzymes():
+    messagebox.showinfo("Enzymes", """
+    Enzymes:
+    1. Biological Catalysts: Speed up chemical reactions.
+    2. Specificity: Each enzyme is specific to a particular substrate.
+    3. Active Site: The part of the enzyme that binds to the substrate.
+    4. Factors Affecting Enzyme Activity: Temperature, pH, and substrate concentration.
+    5. Inhibition: Enzyme activity can be stopped by inhibitors.
+    """)
+
+def prokaryotes_and_eukaryotes():
+    messagebox.showinfo("Prokaryotes vs Eukaryotes", """
+    Prokaryotes vs Eukaryotes:
+    1. Prokaryotes: Single-celled organisms without a nucleus (e.g., bacteria).
+    2. Eukaryotes: Organisms with cells that have a nucleus and membrane-bound organelles (e.g., animals, plants).
+    """)
+
+def cell_parts():
+    messagebox.showinfo("Parts of a Cell", """
+    Parts of a Cell:
+    1. Nucleus: Contains genetic material (DNA).
+    2. Mitochondria: Powerhouse of the cell, generates energy.
+    3. Ribosomes: Synthesize proteins.
+    4. Endoplasmic Reticulum: Transports materials in the cell.
+    5. Golgi Apparatus: Modifies, sorts, and packages proteins.
+    6. Cell Membrane: Controls what enters and exits the cell.
+    7. Cytoplasm: Gel-like substance where cell activities take place.
+    """)
+
+def transport():
+    messagebox.showinfo("Cell Transport", """
+    Types of Cell Transport:
+    1. Passive Transport: Movement of molecules without energy (e.g., diffusion, osmosis).
+    2. Active Transport: Movement of molecules using energy (e.g., sodium-potassium pump).
+    3. Endocytosis: Cell engulfs material.
+    4. Exocytosis: Cell expels material.
+    """)
+
+def microscope_parts():
+    messagebox.showinfo("Microscope Parts", """
+    Parts of a Microscope:
+    1. Eyepiece: Where you look through to see the image.
+    2. Objective Lenses: Lenses of different magnifications.
+    3. Stage: Platform to place the specimen.
+    4. Light Source: Provides illumination.
+    5. Coarse and Fine Adjustment: Focuses the image.
+    6. Arm and Base: Support the microscope.
+    """)
+
+def cell_theory():
+    messagebox.showinfo("Cell Theory", """
+    Cell Theory:
+    1. All living things are made of cells.
+    2. The cell is the basic unit of life.
+    3. All cells come from pre-existing cells.
+    """)
+
+# Function for creating the debugging interface
+def open_debugger():
+    def on_debug_button_click():
+        code = code_input.get("1.0", tk.END).strip()  # Get text from the input box
+        result = debug_code(code)  # Debug the code
+        debug_output.config(state=tk.NORMAL)  # Allow modification of output field
+        debug_output.delete(1.0, tk.END)  # Clear previous output
+        debug_output.insert(tk.END, result)  # Insert new result
+        debug_output.config(state=tk.DISABLED)  # Make output field read-only
+
+    # Create a new debugging window
+    debug_window = tk.Toplevel(window)
+    debug_window.title("Plain Text Code Debugger")
+
+    # Label
+    tk.Label(debug_window, text="Enter Python code here to debug:").pack(pady=10)
+
+    # Text input box for code
+    code_input = tk.Text(debug_window, height=10, width=50)
+    code_input.pack(pady=10)
+
+    # Debug output area (display error or success)
+    debug_output = tk.Text(debug_window, height=5, width=50, wrap=tk.WORD, state=tk.DISABLED)
+    debug_output.pack(pady=10)
+
+    # Debug button to execute the code
+    debug_button = tk.Button(debug_window, text="Debug Code", command=on_debug_button_click)
+    debug_button.pack(pady=10)
+
+# Main menu function with Tkinter GUI
+def main_menu():
+    global window
+    # Create the main window
+    window = tk.Tk()
+    window.title("Science Learning Program")
+
+    # Create buttons for each topic
+    btn1 = tk.Button(window, text="Scientific Method", command=scientific_method)
+    btn1.pack(pady=5)
+
+    btn2 = tk.Button(window, text="Characteristics of Life", command=characteristics_of_life)
+    btn2.pack(pady=5)
+
+    btn3 = tk.Button(window, text="Chemistry", command=chemistry)
+    btn3.pack(pady=5)
+
+    btn4 = tk.Button(window, text="Properties of Water", command=properties_of_water)
+    btn4.pack(pady=5)
+
+    btn5 = tk.Button(window, text="Biomolecules", command=biomolecules)
+    btn5.pack(pady=5)
+
+    btn6 = tk.Button(window, text="Enzymes", command=enzymes)
+    btn6.pack(pady=5)
+
+    btn7 = tk.Button(window, text="Prokaryotes and Eukaryotes", command=prokaryotes_and_eukaryotes)
+    btn7.pack(pady=5)
+
+    btn8 = tk.Button(window, text="Cell Parts", command=cell_parts)
+    btn8.pack(pady=
+
